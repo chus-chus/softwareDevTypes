@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 # An extraction and analysis of software development profiles from project quality data.
 
 ### **Description:**
@@ -43,3 +46,83 @@ An alternative for **2. DataPreparation**, **3. Modelling** and **4. Evaluation*
 Before performing these two steps, the raw csv files from the TechDebt Dataset must be in `/data/raw/`.
 
 We have also included in the replication package (in the folder `models`) the final selected model in a joblib object: using tSVD for dimensionality reduction and KMeans with 5 clusters. This model could in fact be put in production, for example, as an Amazon Lambda function and simple web app, but we do not believe it would be of great use: the conclusions stated and the recommendations to the business (and the actions taken by it) are the important part of this study. In the future, one could re-perform our analysis to see if the clusters have changed in a good way (i.e. more clean code, less issues induced).
+
+### Project structure
+```
+.
+├── LICENSE
+├── README.md
+├── data
+│   ├── interim
+│   │   ├── DataPreparation
+│   │   │   ├── CleanData
+│   │   │   ├── ConstructData
+│   │   │   └── SelectData
+│   │   └── Modelling
+│   │       ├── 3clusterProfilesTSVD.csv
+│   │       ├── clusterProfilesPCA.csv
+│   │       └── clusterProfilesTSVD.csv
+│   ├── processed
+│   │   └── DEVELOPERS_DATA.csv
+│   └── raw
+├── models
+│   └── KMeans_tSVD_5_clusters.joblib
+├── notebooks
+│   ├── 1-DataUnderstanding
+│   │   ├── 1.\ DataDescription
+│   │   │   ├── 1-DB-projects.ipynb
+│   │   │   ├── 2-DB-jira-issues.ipynb
+│   │   │   ├── 3-DB-git-sonar-measures.ipynb
+│   │   │   ├── 4-DB-sonar-issues.ipynb
+│   │   │   ├── 5-DB-git-commits.ipynb
+│   │   │   ├── 6-DB-szz-fault-inducing-commits.ipynb
+│   │   │   ├── 7-DB-git-commits-changes.ipynb
+│   │   │   └── 8-DB-refactoring-miner.ipynb
+│   │   ├── 2-DB-data-exploration.ipynb
+│   │   └── 3-DB-data-quality.ipynb
+│   ├── 2-DataPreparation
+│   │   ├── 1-DB-integration.ipynb
+│   │   ├── 1-SelectData
+│   │   │   ├── 1-DB-JIRA-ISSUES.ipynb
+│   │   │   ├── 2-DB-SONAR-MEASURES.ipynb
+│   │   │   ├── 3-DB-SONAR-ISSUES.ipynb
+│   │   │   ├── 4-DB-GIT-COMMITS.ipynb
+│   │   │   ├── 5-DB-SZZ-FAULT-INDUCING-COMMITS.ipynb
+│   │   │   ├── 6-DB-GIT-COMMITS-CHANGES.ipynb
+│   │   │   └── 7-DB-REFACTORING-MINER.ipynb
+│   │   ├── 2-CleanData
+│   │   │   ├── 1-DB-JIRA-ISSUES.ipynb
+│   │   │   ├── 2-DB-SONAR-MEASURES.ipynb
+│   │   │   ├── 3-DB-SONAR-ISSUES.ipynb
+│   │   │   ├── 4-DB-GIT-COMMITS.ipynb
+│   │   │   ├── 5-DB-SZZ-FAULT-INDUCING-COMMITS.ipynb
+│   │   │   ├── 6-DB-GIT-COMMITS-CHANGES.ipynb
+│   │   │   └── 7-DB-REFACTORING-MINER.ipynb
+│   │   ├── 2-DB-format.ipynb
+│   │   └── 3-ConstructData
+│   │       ├── 1-DB-TIME-IN-EACH-PROJECT.ipynb
+│   │       ├── 2-DB-NUMBER_COMMITS.ipynb
+│   │       ├── 3-DB-FIXED-ISSUES.ipynb
+│   │       ├── 4-DB-INDUCED-ISSUES.ipynb
+│   │       ├── 5-DB-REFACTORING-MINER-bug.ipynb
+│   │       ├── 6-DB-JIRA-ISSUES-time.ipynb
+│   │       ├── 7-DB-SONAR-ISSUES-time.ipynb
+│   │       └── 8-DB-SONAR-MEASURES-difference.ipynb
+│   ├── 3-Modelling
+│   │   └── 1-DB-modelling.ipynb
+│   └── 4-Evaluation
+│       ├── 1-DB-Evaluation-TSVD.ipynb
+│       └── 2-DB-Evaluation-PCA.ipynb
+├── reports
+│   ├── Report.docx
+│   └── Report.pdf
+├── requirements.txt
+└── src
+    ├── evaluation
+    │   ├── evaluation_PCA.py
+    │   └── evaluation_TSVD.py
+    ├── features
+    │   └── build_features.py
+    └── models
+        └── modelling.py
+```
